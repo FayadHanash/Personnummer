@@ -26,7 +26,7 @@ namespace PersonNumber
         /// </summary>
         /// <param name="pnr"></param>
         /// <returns></returns>
-        bool Calculate(string pnr)
+        int Calculate(string pnr)
         {  
             for(int i = 0; i < numbers.Length; i++)
             {
@@ -41,16 +41,12 @@ namespace PersonNumber
                 }
                 else
                 {
-                    numbers[i] = ((int)char.GetNumericValue(pnr[i])) * 1;
+                    numbers[i] = ((int)char.GetNumericValue(pnr[i]));
                     sumOfOddNumbers += numbers[i];
                 }
             }
 
-            if ((sumOfEvenNumbers + sumOfOddNumbers) % 10 == 0)
-            {
-                return true;
-            }
-            return false;
+            return ((sumOfEvenNumbers + sumOfOddNumbers) % 10);
 
         }
         /// <summary>
@@ -72,7 +68,7 @@ namespace PersonNumber
                 pnr = pnr.Substring(2);
             if (pnr.Length == 10) 
             {
-                if(Calculate(pnr))
+                if(Calculate(pnr) == 0)
                     return new Tuple<bool, string>(true, GetGender(pnr[8]));
             }
 
